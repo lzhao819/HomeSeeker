@@ -17,8 +17,7 @@ let commentRoutes = require("./routes/comments"),
 
 const mongoose = require('mongoose');
 //mongodb://localhost:27017/home_seeker
-//mongodb+srv://lzhao819:PGXian7258893@cluster0.8jold.mongodb.net/home_seeker?retryWrites=true&w=majority
-mongoose.connect('mongodb+srv://lzhao819:lzhao819@cluster0.leww0.mongodb.net/test?retryWrites=true&w=majority', {
+mongoose.connect(process.env.DATABASEURL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex:true
