@@ -5,14 +5,14 @@ This project was created using Node.js, Express, MongoDB, and Bootstrap.
 Passport.js was used to handle authentication. This project was deployed on Heroku.
 
 ### Landing Page
-![Landing Page Screenshot](https://imgur.com/81sFiWM)
+![Landing Page Screenshot](https://i.imgur.com/mVb3FPL.jpeg)
 
 ### Listing Page
-![Listing Page Screenshot](https://imgur.com/JZZnk0I)
+![Listing Page Screenshot](https://i.imgur.com/JZZnk0I.png)
 * Users can create, edit, and remove houses
 
 ### Info Page
-![Info Page Screenshot](https://imgur.com/fNpiO6g)
+![Info Page Screenshot](https://i.imgur.com/fNpiO6g.png)
 * Users can review houses, edit or remove their review
 
 
