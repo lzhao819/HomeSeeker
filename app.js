@@ -16,8 +16,9 @@ let commentRoutes = require("./routes/comments"),
 	indexRoutes = require("./routes/index");
 
 const mongoose = require('mongoose');
-//mongodb://localhost:27017/home_seeker
-mongoose.connect(process.env.DATABASEURL, {
+//
+let url = process.env.DATABASEURL || "mongodb://localhost:27017/home_seeker";
+mongoose.connect(url, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex:true
