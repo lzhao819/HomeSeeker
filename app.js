@@ -17,7 +17,8 @@ let commentRoutes = require("./routes/comments"),
 
 const mongoose = require('mongoose');
 //mongodb://localhost:27017/home_seeker
-mongoose.connect('mongodb+srv://lzhao819:PGXian7258893@cluster0.8jold.mongodb.net/home_seeker?retryWrites=true&w=majority', {
+//mongodb+srv://lzhao819:PGXian7258893@cluster0.8jold.mongodb.net/home_seeker?retryWrites=true&w=majority
+mongoose.connect('mongodb://localhost:27017/home_seeker', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex:true
@@ -56,5 +57,5 @@ app.use("/houses", houseRoutes);
 app.use("/houses/:id/comments", commentRoutes);
 
 app.listen(process.env.PORT || 3000, process.env.IP, function(){
-	console.log('The HomeSeeker Server Has Started on Port 3000'); 
+	console.log('The HomeSeeker Server Has Started'); 
 });
