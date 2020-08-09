@@ -16,9 +16,11 @@ let commentRoutes = require("./routes/comments"),
 	indexRoutes = require("./routes/index");
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/home_seeker', {
+//mongodb://localhost:27017/home_seeker
+mongoose.connect('mongodb+srv://lzhao819:PGXian7258893@cluster0.8jold.mongodb.net/home_seeker?retryWrites=true&w=majority', {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
+  useCreateIndex:true
 })
 .then(() => console.log('Connected to DB!'))
 .catch(error => console.log(error.message));
