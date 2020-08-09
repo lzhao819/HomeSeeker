@@ -5,7 +5,7 @@ This project was created using Node.js, Express, MongoDB, and Bootstrap.
 Passport.js was used to handle authentication. This project was deployed on Heroku.
 
 ### Landing Page
-![Landing Page Screenshot](https://imgur.com/a/8mj8yOu)
+![Landing Page Screenshot](https://imgur.com/81sFiWM)
 
 ### Listing Page
 ![Listing Page Screenshot](https://imgur.com/JZZnk0I)
