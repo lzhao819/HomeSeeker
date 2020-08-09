@@ -10,7 +10,7 @@ router.get("/", function(req, res){
 		if(err){
 			console.log(err);
 		}else{
-			res.render("houses/index",{houses:allHouses});
+			res.render("houses/index",{houses:allHouses, page: 'houses'});
 		}
 	});
 	

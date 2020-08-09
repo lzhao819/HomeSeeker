@@ -1,5 +1,5 @@
 <%- include("../partials/header") %>
-<div class="container">
+
 	<div class="row">
 		<div class="col-md-3">
 			<p class="lead">HomeSeeker</p>
@@ -17,8 +17,8 @@
                     <h4><a><%=house.name%></a></h4>
                     <p><%= house.description %></p>
 					<p>
-                        <em>Submitted By <%= house.author.username %></em>
-                    </p>
+						<em>Submitted by: <%= house.author.username %>, <%= moment(house.createdAt).fromNow() %></em>
+					</p>
 					<% if(currentUser && house.author.id.equals(currentUser._id)){ %>
 						<a class="btn btn-xs btn-warning" href="/houses/<%= house._id %>/edit">Edit</a>
 						<form class="delete-form" action="/houses/<%= house._id %>?_method=DELETE" method="POST">
@@ -35,7 +35,7 @@
 					<div class="row">
                         <div class="col-md-12">
                             <strong><%= comment.author.username %></strong>
-                            <span class="pull-right">10 days ago</span>
+                            <span class="pull-right"><%= moment(comment.createdAt).fromNow() %></span>
                             <p>
                                 <%= comment.text %> 
                             </p>
@@ -52,6 +52,6 @@
 			</div>	
 		</div>
 	</div>	
-</div>
+
 
 <%- include("../partials/footer") %>
