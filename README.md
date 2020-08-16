@@ -8,7 +8,7 @@ Passport.js was used to handle authentication. This project was deployed on Hero
 ![Landing Page Screenshot](https://i.imgur.com/mVb3FPL.jpeg)
 
 ### Listing Page
-![Listing Page Screenshot](https://i.imgur.com/JZZnk0I.png)
+![Listing Page Screenshot](https://i.imgur.com/1GkLmMz.png)
 * Users can create, edit, and remove houses
 
 ### Info Page
