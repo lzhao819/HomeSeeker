@@ -7,7 +7,8 @@
                 <li class="list-group-item active">Info 1</li>
                 <li class="list-group-item">Info 2</li>
                 <li class="list-group-item">Info 3</li>
-            </div>
+			</div>
+			<div id="map"></div>
 		</div>	
 		<div class="col-md-9">
 			<div class="thumbnail">
@@ -53,5 +54,33 @@
 		</div>
 	</div>	
 
+	<script>
+		function initMap() {
+		  var lat = <%= house.lat %>;
+		  var lng = <%= house.lng %>;
+		  var center = {lat: lat, lng: lng };
+		  var map = new google.maps.Map(document.getElementById('map'), {
+			  zoom: 8,
+			  center: center,
+			  scrollwheel: false
+		  });
+		  var contentString = `
+			<strong><%= house.name %><br />
+			<%= house.location %></strong>
+			<p><%= house.description %></p>
+		  `
+		  var infowindow = new google.maps.InfoWindow({
+			content: contentString
+		  });
+		  var marker = new google.maps.Marker({
+			  position: center,
+			  map: map
+		  });
+		  marker.addListener('click', function() {
+			infowindow.open(map, marker);
+		  });
+		}
+	  </script>
+	  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC-39uwJcxLORCh0GgluyZxIGr0uvn6WNs&callback=initMap"></script>
 
 <%- include("../partials/footer") %>

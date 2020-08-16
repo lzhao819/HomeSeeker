@@ -7,6 +7,9 @@ let houseSchema = new mongoose.Schema({
 	image:String,
 	price:String,
    description:String,
+   location: String,
+   lat: Number,
+   lng: Number,
    createdAt: { type: Date, default: Date.now },
 	author: {
       id: {

@@ -2,6 +2,16 @@ let express = require("express");
 let router  = express.Router();
 let House = require("../models/house");
 let middleware = require("../middleware");
+var NodeGeocoder = require('node-geocoder');
+ 
+var options = {
+  provider: 'google',
+  httpAdapter: 'https',
+  apiKey: process.env.GEOCODER_API_KEY,
+  formatter: null
+};
+ 
+var geocoder = NodeGeocoder(options);
 
 //INDEX - show all houses
 router.get("/", function(req, res){
@@ -25,20 +35,29 @@ router.post("/", middleware.isLoggedIn, function(req,res){
 	let author = {
         id: req.user._id,
         username: req.user.username
-    }
-	let newHouse = {name:name, image:image, description:description, price:price, author:author};
-	//creat new house and save to database
-	House.create(newHouse, function(err, newlyCreated){
-		if(err){
-			req.flash("error",err.message);
-		}else{
-			req.flash("success","Successfully added new house!");
-			//redirect to houses page
-			res.redirect("/houses");
+	}
+	geocoder.geocode(req.body.location, function (err, data) {
+		if (err || !data.length) {
+		  req.flash('error', 'Invalid address');
+		  return res.redirect('back');
 		}
+		var lat = data[0].latitude;
+		var lng = data[0].longitude;
+		var location = data[0].formattedAddress;
+		let newHouse = {name:name, image:image, description:description, price:price, author:author, location: location, lat: lat, lng: lng};
+		//creat new house and save to database
+		House.create(newHouse, function(err, newlyCreated){
+			if(err){
+				req.flash("error",err.message);
+			}else{
+				req.flash("success","Successfully added new house!");
+				//redirect to houses page
+				res.redirect("/houses");
+			}
+		});
 	});
-	
 });
+
 //NEW - show form to create new house 
 router.get("/new", middleware.isLoggedIn, function(req, res){
    res.render("houses/new"); 
@@ -65,16 +84,25 @@ router.get("/:id/edit", middleware.checkHouseOwnership, function(req, res){
 
 //UPDATE
 router.put("/:id",middleware.checkHouseOwnership, function(req, res){
-    // find and update the correct campground
-    House.findByIdAndUpdate(req.params.id, req.body.house, function(err, updatedHouse){
-       if(err){
-           res.redirect("/houses");
-       } else {
-		   req.flash("success","House info updated!");
-           //redirect somewhere(show page)
-           res.redirect("/houses/" + req.params.id);
-       }
-    });
+	geocoder.geocode(req.body.location, function (err, data) {
+		if (err || !data.length) {
+		  req.flash('error', 'Invalid address');
+		  return res.redirect('back');
+		}
+		req.body.house.lat = data[0].latitude;
+		req.body.house.lng = data[0].longitude;
+		req.body.house.location = data[0].formattedAddress;
+		// find and update the correct house
+		House.findByIdAndUpdate(req.params.id, req.body.house, function(err, updatedHouse){
+		if(err){
+			res.redirect("/houses");
+		} else {
+			req.flash("success","House info updated!");
+			//redirect somewhere(show page)
+			res.redirect("/houses/" + req.params.id);
+		}
+		});
+	});
 });
 
 //DESTROY
