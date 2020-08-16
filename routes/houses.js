@@ -86,7 +86,7 @@ router.get("/:id/edit", middleware.checkHouseOwnership, function(req, res){
 router.put("/:id",middleware.checkHouseOwnership, function(req, res){
 	geocoder.geocode(req.body.location, function (err, data) {
 		if (err || !data.length) {
-		  req.flash('error', 'Invalid address');
+		  req.flash('error', err.message);
 		  return res.redirect('back');
 		}
 		req.body.house.lat = data[0].latitude;
